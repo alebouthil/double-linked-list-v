@@ -63,10 +63,10 @@ pub fn (mut l Linked_List[T]) push_front(value T) {
 	} else {
 		x := Node[T]{
 			value : value
-			next : l.head
+			prev : l.head
 		}
 		l.length += 1
-		l.head.prev = &x
+		l.head.next= &x
 		l.head = &x
 	}
 }
@@ -103,9 +103,9 @@ pub fn (mut l Linked_List[T]) pop_front() !T{
 		return value
 	} else {
 		unsafe {
-			l.head.next.prev = nil
+			l.head.prev.next= nil
 		}
-		l.head = l.head.next
+		l.head = l.head.prev
 		l.length -= 1
 		return value
 	}

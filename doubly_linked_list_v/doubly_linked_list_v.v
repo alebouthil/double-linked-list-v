@@ -52,21 +52,22 @@ pub fn (mut l Linked_List[T]) push_rear(value T) {
 		l.tail = &x
 	}
 }
+
 pub fn (mut l Linked_List[T]) push_front(value T) {
 	if l.is_empty() {
 		x := Node[T]{
-			value : value
+			value: value
 		}
 		l.head = &x
 		l.tail = &x
 		l.length += 1
 	} else {
 		x := Node[T]{
-			value : value
-			prev : l.head
+			value: value
+			prev: l.head
 		}
 		l.length += 1
-		l.head.next= &x
+		l.head.next = &x
 		l.head = &x
 	}
 }
@@ -91,8 +92,9 @@ pub fn (mut l Linked_List[T]) pop_rear() !T {
 		return value
 	}
 }
-pub fn (mut l Linked_List[T]) pop_front() !T{
-	//returns value of front node and deletes it
+
+pub fn (mut l Linked_List[T]) pop_front() !T {
+	// returns value of front node and deletes it
 	value := l.head.value
 	if l.length == 1 {
 		unsafe {
@@ -103,18 +105,23 @@ pub fn (mut l Linked_List[T]) pop_front() !T{
 		return value
 	} else {
 		unsafe {
-			l.head.prev.next= nil
+			l.head.prev.next = nil
 		}
 		l.head = l.head.prev
 		l.length -= 1
 		return value
 	}
 }
+
 pub fn (l Linked_List[T]) to_array() []T {
 	mut array := [l.head.value]
 	mut x := l.head.next
-	for _ in 0..l.length{
-		unsafe {if x == nil {break}}
+	for _ in 0 .. l.length {
+		unsafe {
+			if x == nil {
+				break
+			}
+		}
 		array << x.value
 		x = x.next
 	}
